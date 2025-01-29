@@ -109,9 +109,9 @@ export default function Header() {
 
           {user ? (
             
-            <Button onClick={() => dispatch(logout())}>
-              logOut
-            </Button>
+            <button className="btn btn-primary" onClick={() => dispatch(logout())}>
+              logout
+            </button>
 
             ) : (
               <>
