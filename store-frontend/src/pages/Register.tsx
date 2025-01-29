@@ -33,7 +33,7 @@ const Register = () => {
       const res = await register(userInfo).unwrap();
       console.log(res);
       dispatch(setUser({ user: res.user, token: res.token }));
-      toast.success('Registered', { id: toastId, duration:5000 });
+      toast.success('Registered', { id: toastId, duration:2000 });
       navigate(`/login`);
     } catch (err) {
       toast.error('Registration issues', { id: toastId, duration:2000 });
