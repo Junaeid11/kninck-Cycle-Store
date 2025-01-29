@@ -10,8 +10,8 @@ import handleValidationError from '../errors/handleValidationError';
 import handleCastError from '../errors/handleCastError';
 import handleDuplicateError from '../errors/handleDuplicateError';
 import { APPerror } from '../errors/AppError';
-import config from '../config';
-import { TErrorSource } from '../../interface/Error';
+import config from '../config';import { TErrorSource } from '../../interface/error'
+;
 
 const globalErrorHandler: ErrorRequestHandler = (err, req,res, next,
 ) => {
