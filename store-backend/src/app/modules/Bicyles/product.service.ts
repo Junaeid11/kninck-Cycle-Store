@@ -1,20 +1,42 @@
+import { StatusCodes } from 'http-status-codes';
 import QueryBuilder from "../../../builder/QueryBuilder";
+import { IImageFiles } from "../../../interface/IImageFile";
+import { APPerror } from "../../errors/AppError";
 import { productSearchable } from "./product.constant";
 import { BiCycle } from "./product.interface";
 import Product from "./product.model";
 
 
-const createProductIntoDb = async (data: BiCycle): Promise<BiCycle> => {
-    const result = await Product.create(data);
-    return result;
+
+
+const createProductIntoDb = async (productData: Partial<BiCycle>,
+    productImages: IImageFiles,) => {
+        const { images } = productImages;
+
+        if (!images || images.length === 0) {
+           throw new APPerror(
+            StatusCodes.BAD_REQUEST,
+              'Meal images are required.'
+           );
+        }
+        productData.image = images.map((image) => image.path);
+
+        const newProduct = new Product({
+           ...productData,
+        });
+        const result = await newProduct.save();
+     
+        return {
+           result,
+        };
 
 }
 const getProductFromDb = async (query: Record<string, unknown>) => {
     const productQuery = new QueryBuilder(Product.find(), query).search(productSearchable).filter().sort().fields().paginate()
 
 
-    const result =await productQuery.modelQuery
-    const meta =await productQuery.countTotal()
+    const result = await productQuery.modelQuery
+    const meta = await productQuery.countTotal()
     return {
         result,
         meta

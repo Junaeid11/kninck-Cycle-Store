@@ -3,12 +3,13 @@ import { productServices } from "./product.service";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import  httpStatus  from "http-status";
+import { IImageFiles } from "../../../interface/IImageFile";
 
 //for creating a product
 const createProduct = async (req: Request, res: Response, ): Promise<void> => {
     try {
         const data = req.body;
-        const result = await productServices.createProductIntoDb(data);
+        const result = await productServices.createProductIntoDb(data,   req.files as IImageFiles,);
         res.status(200).json({
             message: "Bicycle created successfully",
             success: true,
