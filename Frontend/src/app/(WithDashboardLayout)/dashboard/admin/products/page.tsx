@@ -52,7 +52,7 @@ export default function Dashboard() {
     <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card className="col-span-2">
         <CardContent>
-          <h2 className="text-xl font-semibold mb-4">All Meals</h2>
+          <h2 className="text-xl font-semibold mb-4">All Products</h2>
           <Table>
             <TableHeader>
               <TableRow>
@@ -69,7 +69,7 @@ export default function Dashboard() {
             <TableBody>
               {meals.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center text-gray-500">No meals available</TableCell>
+                  <TableCell colSpan={8} className="text-center text-gray-500">No products available</TableCell>
                 </TableRow>
               ) : (
                 meals.map((meal) => (

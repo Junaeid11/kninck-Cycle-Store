@@ -4,7 +4,7 @@ import FAQSection from "@/components/modules/home/FAQ";
 import FeatureProducts from "@/components/modules/home/FeaturedProducts";
 import HeroSection from "@/components/modules/home/HeroSection";
 import NewsLatterSection from "@/components/modules/home/Newslatter";
-import Blogs from "@/components/modules/home/Recipe-Blog";
+import Blogs from "@/components/modules/home/Blog";
 import TopSellingDishes from "@/components/modules/home/TopSelling";
 import FeatureSection from "@/components/modules/home/Feature";
 

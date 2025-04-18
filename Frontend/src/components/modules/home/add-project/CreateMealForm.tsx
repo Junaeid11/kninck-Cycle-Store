@@ -95,7 +95,7 @@ export default function CreateMealForm() {
 
     return (
         <div className="rounded-xl flex-grow mx-10 p-5 my-5">
-            <h1 className="text-2xl text-violet-400 text-center font-semibold mb-2">Create Meal</h1>
+            <h1 className="text-2xl text-violet-400 text-center font-semibold mb-2">Create Product</h1>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

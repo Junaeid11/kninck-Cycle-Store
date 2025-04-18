@@ -31,14 +31,14 @@ const HeroProductSlider = () => {
       <section className="w-full relative bg-white py-20 text-center font-poppins overflow-hidden">
         
         {/* Background Watermark */}
-        <h2 className="text-[6rem] sm:text-[8rem] lg:text-[9rem] font-extrabold text-gray-100 absolute top-6 left-1/2 transform -translate-x-1/2 pointer-events-none z-0 select-none tracking-widest">
+        <h2 className="text-[4rem] lg:text-[7rem] font-extrabold text-gray-100 absolute  left-1/2 transform -translate-x-1/2 pointer-events-none z-0 select-none tracking-widest">
           OFFER
         </h2>
 
         {/* Main Title Section */}
-        <div className="relative z-10 mb-12">
+        <div className="relative z-10 mb-16">
           <h3 className="text-4xl md:text-5xl font-bold text-gray-800">Summer Cycling Deals</h3>
-          <div className="w-12 h-1 bg-[#538fde] mx-auto mt-3" />
+          <div className="w-12 h-1 bg-[#de5353] mx-auto mt-3" />
         </div>
 
         {/* Grid Content */}

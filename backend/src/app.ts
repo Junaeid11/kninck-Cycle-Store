@@ -9,7 +9,7 @@ import notFound from "./app/middleware/notFound";
 const app: Application = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "https://krinck.vercel.app" }));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
   res.status(StatusCodes.OK).json({
     success: true,
-    message: "Welcome to Meal Hub",
+    message: "Welcome to krinck Store",
     developerContact: {
       email: "junaeidahmed979@gmail.com",
     },

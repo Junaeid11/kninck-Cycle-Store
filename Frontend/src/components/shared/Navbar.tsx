@@ -133,7 +133,7 @@ export default function Navbar() {
 
               {user?.email ? (
 
-                <Button onClick={handleLogOut} className="rounded-full bg-amber-500 text-white">Logout</Button>
+                <Button onClick={handleLogOut} className="rounded-full bg-blue-500 text-white">Logout</Button>
 
               ) : (
                 <Link href="/login">
@@ -237,7 +237,7 @@ export default function Navbar() {
               </Button>
             </Link>
           )}
-          <div className="hidden lg:flex">
+          <div className=" flex gap-2">
             {user?.email ? (
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -253,7 +253,7 @@ export default function Navbar() {
                     <Link href={`/dashboard/${user?.role}/`}>Dashboard</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="bg-amber-400 text-black cursor-pointer" onClick={handleLogOut}>
+                  <DropdownMenuItem className="bg-blue-400 text-black cursor-pointer" onClick={handleLogOut}>
                     <LogOut />
                     <span>Log Out</span>
                   </DropdownMenuItem>

@@ -24,13 +24,13 @@ const Blogs = () => {
 
   return (
     <NMContainer >
-      <div className="py-10 bg-white text-center relative overflow-hidden">
-        <h2 className="text-[9rem] font-extrabold text-gray-100 absolute top-0 left-1/2 transform -translate-x-1/2 pointer-events-none z-0">
+      <div className="py-5 bg-white text-center relative overflow-hidden">
+        <h2 className="text-[4rem] lg:text-[7rem] font-extrabold text-gray-100 absolute  left-1/2 transform -translate-x-1/2 pointer-events-none z-0">
          BLOGS
         </h2>
 
         {/* Main Title */}
-        <div className="relative z-10">
+        <div className="relative z-10 lg:pb-14">
           <h3 className="text-4xl font-bold text-gray-900">Blogs & News</h3>
           <div className="w-10 h-1 bg-red-500 mx-auto mt-2 mb-12" />
         </div>

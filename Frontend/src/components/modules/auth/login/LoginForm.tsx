@@ -160,13 +160,7 @@ export default function LoginPage() {
               )}
             />
 
-            {/* ReCAPTCHA */}
-            <div className="mt-4 flex items-center justify-center">
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!}
-                onChange={handleReCaptcha}
-              />
-            </div>
+        
 
             {/* Login Button */}
             <Button

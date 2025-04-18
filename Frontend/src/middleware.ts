@@ -7,7 +7,7 @@ const authRoutes = ["/login", "/register"];
 
 const roleBasedPrivateRoutes = {
   user: [/^\/customer/],
-  provider: [/^\/provider/],
+  admin: [/^\/admin/],
 };
 
 export const middleware = async (request: NextRequest) => {
@@ -21,7 +21,7 @@ export const middleware = async (request: NextRequest) => {
     } else {
       return NextResponse.redirect(
         new URL(
-          `https://khabar-box.vercel.app/login?redirectPath=${pathname}`,
+          `https://krinck.vercel.app/login?redirectPath=${pathname}`,
           request.url
         )
       );
@@ -42,6 +42,6 @@ export const config = {
   matcher: [
     "/login",
     "/customer/:path*",
-    "/provider/:path*",
+    "/admin/:path*",
   ],
 };
