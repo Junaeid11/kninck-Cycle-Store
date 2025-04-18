@@ -96,13 +96,13 @@ export default function LoginPage() {
         </div>
         <div className="flex justify-between mb-4">
           <Button
-            onClick={() => autofillCredentials("user12@gmail.com", "tanim121")}
+            onClick={() => autofillCredentials("customer@gmail.com", "tanim121")}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
           >
             User Credentials
           </Button>
           <Button
-            onClick={() => autofillCredentials("provider@gmail.com", "provider123")}
+            onClick={() => autofillCredentials("admin@gmail.com", "tanim121")}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
           >
             Provider Credentials

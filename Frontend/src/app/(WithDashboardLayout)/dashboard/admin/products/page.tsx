@@ -95,7 +95,7 @@ export default function Dashboard() {
                         title="Edit"
                         onClick={() =>
                           router.push(
-                            `/dashboard/provider/update-meal/${meal._id}`
+                            `/dashboard/admin/update-meal/${meal._id}`
                           )
                         }
                       >

@@ -57,7 +57,7 @@ const FAQSection = () => {
           <div className="w-10 h-1 bg-red-500 mx-auto mt-2 mb-12" />
         </div>
 
-        <div className="flex flex-col-reverse lg:flex-row items-center lg:space-x-8 relative z-10">
+        <div className="flex mx-5 flex-col-reverse lg:flex-row items-center lg:space-x-8 relative z-10">
           {/* Left side: FAQs */}
           <div className="flex-1 w-full">
             <ul>

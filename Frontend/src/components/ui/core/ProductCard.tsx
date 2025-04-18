@@ -31,9 +31,9 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
-      className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl bg-white border border-gray-100 transition-all duration-300"
+      className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300"
     >
-      <Card className="border-none shadow-none p-0">
+      <Card className="border-none shadow-none p-0 bg-sky-100 ">
         <CardHeader className="relative p-0">
           {/* Discount Badge */}
           {meal?.discountPrice && (
@@ -67,7 +67,7 @@ const ProductCard = ({ meal }: { meal: IMeal }) => {
                 onClick={() => handleAddProduct(meal)}
                 className="bg-white text-gray-800 hover:bg-gray-100 p-3 rounded-full shadow-lg"
               >
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCart className="w-5 text-blue-500 h-5" />
               </Button>
             </motion.div>
           </motion.div>

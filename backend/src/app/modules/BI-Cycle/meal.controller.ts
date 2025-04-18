@@ -16,7 +16,7 @@ const CreateMeal = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Meal created successfully",
+    message: "Product created successfully",
     data: result,
   });
 });
@@ -27,7 +27,7 @@ const getAllMeal = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Meals are retrieved successfully",
+    message: "Products are retrieved successfully",
     meta: result.meta,
     data: result.result,
   });
@@ -39,7 +39,7 @@ const getSingleMeal = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Meal retrieved successfully",
+    message: "Product retrieved successfully",
     data: result,
   });
 });
@@ -61,7 +61,7 @@ const updateProduct = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Meal updated successfully",
+    message: "Product updated successfully",
     data: result,
   });
 });
@@ -81,7 +81,7 @@ const deleteProduct = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Meal deleted successfully",
+    message: "Product deleted successfully",
     data: result,
   });
 });

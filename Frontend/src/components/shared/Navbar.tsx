@@ -122,9 +122,9 @@ export default function Navbar() {
                     <Link
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center gap-2 p-3 rounded-md ${pathname === href ? "text-[#7a20e1] font-bold bg-indigo-100" : "text-black hover:text-[#7B2CBF]"}`}
+                      className={`flex items-center gap-2 p-3 rounded-md ${pathname === href ? "text-[#040101] font-bold bg-indigo-100" : "text-black hover:text-[#2c73bf]"}`}
                     >
-                      {icon}
+                   
                       {label}
                     </Link>
                   </li>
@@ -185,40 +185,38 @@ export default function Navbar() {
                 <div className="grid grid-cols-3 gap-4">
                   {/* Category 1 */}
                   <div>
-                    <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">Explore Sections</h3>
-                    <a href="#top-selling" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
-                      <ChevronRight className="mr-2" size={16} /> Top Selling Dishes
+                    <h3 className="font-bold text-lg mb-2 text-[#238adf]">Explore Sections</h3>
+                    <a href="#top-selling" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
+                      <ChevronRight className="mr-2" size={16} /> Top Selling Cycle
                     </a>
-                    <a href="#delivery" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
-                      <ChevronRight className="mr-2" size={16} /> Delivery Section
-                    </a>
-                    <a href="#plans" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
-                      <ChevronRight className="mr-2" size={16} /> Plans Section
+                    <Link href="/find-products" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
+                      <ChevronRight className="mr-2" size={16} /> All Products
+                    </Link>
+                    <a href="#category" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
+                      <ChevronRight className="mr-2" size={16} />All Categories
                     </a>
                   </div>
 
                   {/* Category 2 */}
                   <div>
-                    <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">More Features</h3>
-                    <a href="#feature-meals" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
-                      <ChevronRight className="mr-2" size={16} /> Featured Meals
+                    <h3 className="font-bold text-lg mb-2 text-[#238adf]">More Features</h3>
+                    <a href="#products" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
+                      <ChevronRight className="mr-2" size={16} /> Featured Products
                     </a>
-                    <a href="#partners" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                    <a href="#partners" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
                       <ChevronRight className="mr-2" size={16} /> Partners
                     </a>
-                    <a href="#offers" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                    <a href="#offers" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
                       <ChevronRight className="mr-2" size={16} /> Offers & Discounts
                     </a>
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-2 text-[#7B2CBF]">Information</h3>
-                    <a href="#blogs" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
-                      <ChevronRight className="mr-2" size={16} /> Recipe Blogs
+                    <h3 className="font-bold text-lg mb-2 text-[#238adf]">Information</h3>
+                    <a href="#blogs" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
+                      <ChevronRight className="mr-2" size={16} />Blogs
                     </a>
-                    <a href="#testimonials" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
-                      <ChevronRight className="mr-2" size={16} /> Testimonials
-                    </a>
-                    <a href="#faq" className="flex items-center text-gray-600 hover:text-[#7B2CBF] transition">
+                 
+                    <a href="#faq" className="flex items-center text-gray-600 hover:text-[#bf2c2c] transition">
                       <ChevronRight className="mr-2" size={16} /> FAQs
                     </a>
                   </div>

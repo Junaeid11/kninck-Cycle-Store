@@ -46,9 +46,9 @@ export const getSingleMeal = async (mealId: string) => {
   }
 };
 
-export const addMeal = async (mealData: FormData): Promise<any> => {
+export const addProducts = async (mealData: FormData): Promise<any> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/menu`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/products`, {
       method: "POST",
       body: mealData,
       headers: {

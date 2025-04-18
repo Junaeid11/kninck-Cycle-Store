@@ -1,17 +1,17 @@
 
-import UpdateMealForm from "@/components/ui/core/UpdateMealForm";
+import UpdateProductForm from "@/components/ui/core/UpdateMealForm";
 import { getSingleMeal } from "@/services/meal";
 
 const UpdateMeal = async ({params}:{params: any}) => {
   const { mealId } = await params;
 
-  const { data: meal } = await getSingleMeal(mealId);
+  const { data: product } = await getSingleMeal(mealId);
 
 
   return (
     
       <div className="">
-        <UpdateMealForm meal={meal} />
+        <UpdateProductForm product={product} />
      
  
       </div>

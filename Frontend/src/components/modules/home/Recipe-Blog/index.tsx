@@ -23,9 +23,9 @@ const Blogs = () => {
   }, []);
 
   return (
-    <NMContainer className="my-20">
-      <div className="py-20 bg-white text-center relative overflow-hidden">
-        <h2 className="text-[10rem] font-extrabold text-gray-100 absolute top-6 left-1/2 transform -translate-x-1/2 pointer-events-none z-0">
+    <NMContainer >
+      <div className="py-10 bg-white text-center relative overflow-hidden">
+        <h2 className="text-[9rem] font-extrabold text-gray-100 absolute top-0 left-1/2 transform -translate-x-1/2 pointer-events-none z-0">
          BLOGS
         </h2>
 
@@ -37,8 +37,8 @@ const Blogs = () => {
 
 
         {/* Blog Cards Grid */}
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog, idx) => (
+        <div className="relative mx-5 z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.slice(0,3).map((blog, idx) => (
             <BlogCard key={idx} blogs={blog} />
           ))}
         </div>

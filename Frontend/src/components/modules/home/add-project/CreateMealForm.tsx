@@ -15,7 +15,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import { useEffect, useState } from "react";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
-import { addMeal } from "@/services/meal";
+import { addProducts } from "@/services/meal";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
 import { getAllCategories } from "@/services/Category";
@@ -33,43 +33,42 @@ export default function CreateMealForm() {
     const form = useForm();
     const { formState: { isSubmitting } } = form;
 
-    const allowedDietaryTags = [
-        "vegan", "vegetarian", "gluten-free", "keto", "paleo", "halal", "kosher"
-    ];
-
-    const tagOptions = allowedDietaryTags.map(tag => ({
-        value: tag,
-        label: tag.charAt(0).toUpperCase() + tag.slice(1)
-    }));
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const modifiedData = {
-            ...data,
+            name: data.name,
+            brand: data.brand,
+            price: parseFloat(data.price),
+            discountPrice: parseFloat(data.discountPrice),
+            isActive: data.isActive ?? true,
+            slug: data.slug,
             category: selectedCategory?._id,
-            ingredients: typeof data.ingredients === "string" && data.ingredients.trim()
-                ? data.ingredients.split(",").map((i: any) => i.trim())
-                : [],
-            dietaryTags: selectedTags,
-            price: parseFloat(data.price) || 0,
-            discountPrice: parseFloat(data.discountPrice) || 0,
-            stock: parseInt(data.stock) || 0,
-            rating: parseFloat(data.rating) || 0,
-            ratingCount: parseInt(data.ratingCount) || 0,
-            preparationTime: parseInt(data.preparationTime) || 0,
-            calories: parseInt(data.calories) || 0,
-            protein: parseInt(data.protein) || 0,
-            carbs: parseInt(data.carbs) || 0,
-            fat: parseInt(data.fat) || 0,
+            description: data.description,
+            quantity: parseInt(data.quantity),
+            stock: parseInt(data.stock),
+            specs: {
+                wheelSize: data["specs.wheelSize"],
+                frameMaterial: data["specs.frameMaterial"],
+                brakes: data["specs.brakes"],
+                ageRange: data["specs.ageRange"],
+            },
+            variants: {
+                colors: data["variants.colors"]?.split(",").map((c) => c.trim()) || [],
+                sizes: data["variants.sizes"]?.split(",").map((s) => s.trim()) || [],
+            },
         };
+
 
         try {
             const formData = new FormData();
             formData.append("data", JSON.stringify(modifiedData));
+            console.log(modifiedData)
             if (imageFiles.length > 0) {
                 formData.append("images", imageFiles[0]);
             }
 
-            const res = await addMeal(formData);
+            const res = await addProducts(formData);
+            console.log(res)
 
             if (res?.success) {
                 form.reset();
@@ -82,17 +81,17 @@ export default function CreateMealForm() {
             toast.error("An error occurred. Please try again.");
         }
     };
-      useEffect(() => {
+    useEffect(() => {
         const fetchCategories = async () => {
-          try {
-            const { data } = await getAllCategories();
-            setCategories(data);
-          } catch (error) {
-            console.error("Error fetching categories:", error);
-          }
+            try {
+                const { data } = await getAllCategories();
+                setCategories(data);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
         };
         fetchCategories();
-      }, []);
+    }, []);
 
     return (
         <div className="rounded-xl flex-grow mx-10 p-5 my-5">
@@ -101,20 +100,13 @@ export default function CreateMealForm() {
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         {[
-                            { name: "name", label: "Meal Name" },
-                            { name: "description", label: "Description" },
+                            { name: "name", label: "Product Name" },
+                            { name: "brand", label: "Brand" },
                             { name: "slug", label: "Slug" },
-                            { name: "ingredients", label: "Ingredients (comma separated)" },
                             { name: "price", label: "Price" },
                             { name: "discountPrice", label: "Discount Price" },
+                            { name: "quantity", label: "Quantity" },
                             { name: "stock", label: "Stock" },
-                            { name: "rating", label: "Rating" },
-                            { name: "ratingCount", label: "Rating Count" },
-                            { name: "preparationTime", label: "Preparation Time (mins)" },
-                            { name: "calories", label: "Calories" },
-                            { name: "protein", label: "Protein" },
-                            { name: "carbs", label: "Carbs" },
-                            { name: "fat", label: "Fat" },
                         ].map((field) => (
                             <FormField
                                 key={field.name}
@@ -145,20 +137,22 @@ export default function CreateMealForm() {
                             value={selectedCategory ? { value: selectedCategory._id, label: selectedCategory.name } : null}
                         />
                     </div>
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem className="col-span-2">
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Input {...field} value={field.value || ""} placeholder="Enter a product description" />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
-                    <div className="space-y-2 mt-4">
-                        <FormLabel className="text-sm font-medium">Dietary Tags</FormLabel>
-                        <Select
-                            options={tagOptions}
-                            isMulti
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                            onChange={(selectedOptions) =>
-                                setSelectedTags(Array.isArray(selectedOptions) ? selectedOptions.map(option => option.value) : [])
-                            }
-                            value={tagOptions.filter(option => selectedTags.includes(option.value))}
-                        />
-                    </div>
+
+
 
                     {imagePreview.length > 0 ? (
                         <div>

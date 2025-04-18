@@ -64,17 +64,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       ]
       : [
         { title: "Dashboard", url: "/dashboard/admin", icon: LayoutDashboard, isActive: true },
-        { title: "Meal Menu", url: "/dashboard/admin/meal-menu", icon: Utensils, isActive: true },
-        { title: "Post Meal", url: "/dashboard/admin/post-meal", icon: PlusCircle, isActive: true },
+        { title: " Products", url: "/dashboard/admin/products", icon: Utensils, isActive: true },
+        { title: "Post Product", url: "/dashboard/admin/post-product", icon: PlusCircle, isActive: true },
         {
           title: "Profile",
-          url: "/dashboard/provider/profile",
+          url: "/dashboard/admin/profile",
           icon: User,
           isActive: true,
-          items: [{ title: "Update Profile", url: "/dashboard/provider/profile/update-profile" }]
+          items: [{ title: "Update Profile", url: "/dashboard/admin/profile/update-profile" }]
         },
-        { title: "View Order", url: "/dashboard/provider/view-order", icon: Package },
-        { title: "Order Response", url: "/dashboard/provider/response", icon: CheckCircle },
+        { title: "View Order", url: "/dashboard/admin/view-order", icon: Package },
+        { title: "Order Response", url: "/dashboard/admin/response", icon: CheckCircle },
       ],
   };
 

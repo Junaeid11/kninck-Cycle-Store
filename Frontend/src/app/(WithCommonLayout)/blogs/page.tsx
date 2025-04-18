@@ -30,9 +30,9 @@ const Blogs = () => {
   }
   
   return (
-    <NMContainer className="my-20">
+    <NMContainer className="my-5">
     <div className=" items-center text-center">
-      <h2 className="text-3xl font-serif font-bold">Recipe Blogs</h2>
+      <h2 className="text-3xl font-serif font-bold">Blogs</h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
         {blogs.map((blogs, idx) => (
           <RecipeBlogCard key={idx} blogs={blogs} />

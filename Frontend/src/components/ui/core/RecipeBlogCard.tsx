@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const BlogCard = ({ blogs }: { blogs: TBlog }) => {
   return (
-    <div className="max-w-md rounded-2xl overflow-hidden shadow-lg bg-white border hover:shadow-2xl transition-shadow duration-300">
+    <div className="max-w-md rounded-2xl overflow-hidden shadow-lg bg-sky-100 border hover:shadow-2xl transition-shadow duration-300">
     <Image
       src={blogs.image}
       alt={blogs.title}

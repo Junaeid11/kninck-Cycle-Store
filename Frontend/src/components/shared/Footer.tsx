@@ -43,12 +43,12 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-red-500 mb-4">Products</h3>
           <ul className="text-sm space-y-2 text-gray-700">
-            <li><Link href="#">Electric Scooters</Link></li>
-            <li><Link href="#">Electric Bikes</Link></li>
-            <li><Link href="#">Used Electric Scooters</Link></li>
-            <li><Link href="#">Used Electric Bikes</Link></li>
-            <li><Link href="#">Accessories</Link></li>
-            <li><Link href="#">Return Policy</Link></li>
+            <li><Link href="/find-products">Electric Scooters</Link></li>
+            <li><Link href="/find-products">Road Bikes</Link></li>
+            <li><Link href="/find-products">Hybrid Bikes</Link></li>
+            <li><Link href="/find-products">Mountain Bikes</Link></li>
+         
+           
           </ul>
         </div>
 
@@ -56,12 +56,10 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-red-500  mb-4">Quick Links</h3>
           <ul className="text-sm space-y-2 text-gray-700">
-            <li><Link href="#">About Us</Link></li>
-            <li><Link href="#">Scooter and Bike FAQs</Link></li>
-            <li><Link href="#">Reviews</Link></li>
-            <li><Link href="#">Affiliates</Link></li>
-            <li><Link href="#">Guides and Tips</Link></li>
-            <li><Link href="#">Terms and Conditions</Link></li>
+            <li><Link href="/about">About Us</Link></li>
+            <li><Link href="/blogs">Blogs</Link></li>
+            <li><Link href="/find-products">Products</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
@@ -71,15 +69,15 @@ const Footer = () => {
           <ul className="text-sm space-y-4 text-gray-700">
             <li className="flex items-center gap-3">
               <span className="bg-green-100 p-2 rounded-md"><Phone className="text-green-600 w-4 h-4" /></span>
-              (202) 555-0126
+              +880 1910-500496
             </li>
             <li className="flex items-center gap-3">
               <span className="bg-green-100 p-2 rounded-md"><Mail className="text-green-600 w-4 h-4" /></span>
-              ecoelectric@gmail.com
+              junaeidahmed@gmail.com
             </li>
             <li className="flex items-start gap-3">
               <span className="bg-green-100 p-2 rounded-md mt-1"><MapPin className="text-green-600 w-4 h-4" /></span>
-              4140 Parker Rd. Allentown,<br />New Mexico 31134
+              Agrabad, Chattogram<br />NBangladesh
             </li>
           </ul>
         </div>
@@ -87,7 +85,7 @@ const Footer = () => {
 
       {/* Footer Bottom Section */}
       <div className="border-t mt-10 pt-4 flex flex-col lg:flex-row justify-between items-center text-sm text-gray-500">
-        <p>© 2024 EcoElectric. All Rights Reserved.</p>
+        <p>© 2024 krinck store. All Rights Reserved.</p>
         <div className="flex gap-4 mt-2 lg:mt-0">
           </div>
       </div>

@@ -1,4 +1,4 @@
-import CreateMealForm from '@/components/modules/home/add-meal/CreateMealForm'
+import CreateMealForm from '@/components/modules/home/add-project/CreateMealForm'
 import React from 'react'
 
 const CreateMeal = () => {

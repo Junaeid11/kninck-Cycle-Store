@@ -2,6 +2,7 @@
 
 import { FaWeightHanging, FaPalette, FaCog, FaRegFileAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import NMContainer from "@/components/ui/core/NMContainer";
 
 const features = [
   {
@@ -32,7 +33,8 @@ const features = [
 
 const FeatureSection = () => {
   return (
-    <section className="py-20 bg-white text-center relative overflow-hidden">
+  <NMContainer>
+      <section className="min-h-[60vh] bg-white text-center relative overflow-hidden">
       {/* Background Title */}
       <h2 className="text-[10rem] font-extrabold text-gray-100 absolute top-6 left-1/2 transform -translate-x-1/2 pointer-events-none z-0">
         FEATURES
@@ -45,7 +47,7 @@ const FeatureSection = () => {
       </div>
 
       {/* Feature Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 px-6 max-w-6xl mx-auto relative z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 px-6 max-w-6xl mx-5 relative z-10">
         {features.map(({ icon: Icon, title, description, color }, index) => (
           <div
             key={index}
@@ -65,6 +67,7 @@ const FeatureSection = () => {
         ))}
       </div>
     </section>
+  </NMContainer>
   );
 };
 

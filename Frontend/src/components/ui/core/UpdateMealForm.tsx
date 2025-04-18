@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
+import Select from "react-select";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -15,50 +16,45 @@ import {
 import { Input } from "@/components/ui/input";
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
+
+import { getAllCategories } from "@/services/Category";
 import { updateMealMenu } from "@/services/meal";
-import { toast } from "sonner";
 
-import Select from "react-select"; 
-import { IMeal, IMealForm } from "@/types/meal";
-import { getAllCategories } from "@/services/Category"; // Ensure to have this service
-
-const dietaryTags = ["vegan", "vegetarian", "gluten-free", "keto", "paleo", "halal", "kosher"];
-const tagOptions = dietaryTags.map(tag => ({ value: tag, label: tag.charAt(0).toUpperCase() + tag.slice(1) }));
-
-export default function UpdateMealForm({ meal }: { meal: IMeal }) {
+export default function UpdateProductForm({ product }: { product: any }) {
     const [imageFiles, setImageFiles] = useState<File[]>([]);
-    const [imagePreview, setImagePreview] = useState<string[]>(meal?.imageUrls || []);
-    const [selectedTags, setSelectedTags] = useState<string[]>(meal?.dietaryTags || []);
+    const [imagePreview, setImagePreview] = useState<string[]>(product?.imageUrls || []);
     const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]);
 
     const form = useForm({
         defaultValues: {
-            name: meal?.name || '',
-            description: meal?.description || '',
-            ingredients: meal?.ingredients || '',
-            slug: meal?.slug || '',
-            dietaryTags: meal?.dietaryTags || [],
-            price: meal?.price || '',
-            discountPrice: meal?.discountPrice || '',
-            stock: meal?.stock || '',
-            rating: meal?.rating || '',
-            ratingCount: meal?.ratingCount || '',
-            preparationTime: meal?.preparationTime || '',
-            calories: meal?.calories || '',
-            protein: meal?.protein || '',
-            carbs: meal?.carbs || '',
-            fat: meal?.fat || '',
-            category: meal?.category._id || '' // Setting category id to pre-select it
+            name: product?.name || '',
+            description: product?.description || '',
+            slug: product?.slug || '',
+            brand: product?.brand || '',
+            price: product?.price?.toString() || '',
+            discountPrice: product?.discountPrice?.toString() || '',
+            stock: product?.stock?.toString() || '',
+            rating: product?.rating?.toString() || '',
+            category: product?.category?._id || '',
+            specs: {
+                frame: product?.specs?.frame || '',
+                brakes: product?.specs?.brakes || '',
+                weight: product?.specs?.weight || '',
+            },
+            variants: {
+                colors: product?.variants?.colors?.join(', ') || '',
+                sizes: product?.variants?.sizes?.join(', ') || '',
+            },
         }
     });
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await getAllCategories();
-                setCategories(response.data);  // Assuming the data is returned as an array
-            } catch (error) {
-                console.error("Error fetching categories:", error);
+                const res = await getAllCategories();
+                setCategories(res.data);
+            } catch (err) {
+                console.error("Failed to fetch categories:", err);
             }
         };
         fetchCategories();
@@ -69,19 +65,20 @@ export default function UpdateMealForm({ meal }: { meal: IMeal }) {
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const modifiedData = {
             ...data,
-            ingredients: Array.isArray(data.ingredients) ? data.ingredients : (data.ingredients || "").split(",").map((i: any) => i.trim()),
-            dietaryTags: selectedTags,
             price: parseFloat(data.price),
             discountPrice: parseFloat(data.discountPrice),
             stock: parseInt(data.stock),
             rating: parseFloat(data.rating),
-            ratingCount: parseInt(data.ratingCount),
-            preparationTime: parseInt(data.preparationTime),
-            calories: parseInt(data.calories),
-            protein: parseInt(data.protein),
-            carbs: parseInt(data.carbs),
-            fat: parseInt(data.fat),
-            category: data.category // Send the selected category ID
+            specs: {
+                frame: data.specs.frame,
+                brakes: data.specs.brakes,
+                weight: data.specs.weight,
+            },
+            variants: {
+                colors: data.variants.colors.split(',').map((color: string) => color.trim()),
+                sizes: data.variants.sizes.split(',').map((size: string) => size.trim()),
+            },
+            category: data.category
         };
 
         try {
@@ -89,45 +86,38 @@ export default function UpdateMealForm({ meal }: { meal: IMeal }) {
             formData.append("data", JSON.stringify(modifiedData));
             imageFiles.forEach(file => formData.append("images", file));
 
-            const res = await updateMealMenu(formData, meal._id);
+            const res = await updateMealMenu(formData, product._id);
             if (res?.success) {
-                form.reset();
                 toast.success(res.message);
+                form.reset();
             } else {
-                toast.error(res?.message);
+                toast.error(res?.message || "Failed to update product.");
             }
-        } catch (err) {
+        } catch (error) {
             toast.error("An error occurred. Please try again.");
         }
     };
 
     return (
         <div className="rounded-xl flex-grow mx-2 p-5 my-5">
-            <h1 className="text-xl text-center font-semibold mb-2 text-violet-500">Update Meal</h1>
+            <h1 className="text-xl text-center font-semibold mb-4 text-violet-500">Update Product</h1>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        {[ 
-                            { name: "name", label: "Meal Name" },
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {[
+                            { name: "name", label: "Product Name" },
                             { name: "description", label: "Description" },
                             { name: "slug", label: "Slug" },
-                            { name: "ingredients", label: "Ingredients (comma separated)" },
+                            { name: "brand", label: "Brand" },
                             { name: "price", label: "Price" },
-                            
                             { name: "discountPrice", label: "Discount Price" },
                             { name: "stock", label: "Stock" },
                             { name: "rating", label: "Rating" },
-                            { name: "ratingCount", label: "Rating Count" },
-                            { name: "preparationTime", label: "Preparation Time (mins)" },
-                            { name: "calories", label: "Calories" },
-                            { name: "protein", label: "Protein" },
-                            { name: "carbs", label: "Carbs" },
-                            { name: "fat", label: "Fat" },
-                        ].map((field) => (
+                        ].map(field => (
                             <FormField
                                 key={field.name}
                                 control={form.control}
-                                name={field.name as keyof IMealForm}
+                                name={field.name}
                                 render={({ field: inputField }) => (
                                     <FormItem>
                                         <FormLabel>{field.label}</FormLabel>
@@ -139,58 +129,75 @@ export default function UpdateMealForm({ meal }: { meal: IMeal }) {
                                 )}
                             />
                         ))}
+                        {["frame", "brakes", "weight"].map(key => (
+                            <FormField
+                                key={`specs.${key}`}
+                                control={form.control}
+                                name={`specs.${key}`}
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>{`Spec - ${key.charAt(0).toUpperCase() + key.slice(1)}`}</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} value={field.value || ""} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        ))}
+
+                        {/* Variant Fields */}
+                        {["colors", "sizes"].map(key => (
+                            <FormField
+                                key={`variants.${key}`}
+                                control={form.control}
+                                name={`variants.${key}`}
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>{`Variants - ${key}`}</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} placeholder="Comma separated" value={field.value || ""} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        ))}
                     </div>
 
-                    <div className="space-y-2 mt-4">
-                        <FormLabel className="text-sm font-medium">Dietary Tags</FormLabel>
-                        <Select
-                            options={tagOptions}
-                            isMulti
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                            onChange={(selectedOptions) =>
-                                setSelectedTags(selectedOptions.map(option => option.value))
-                            }
-                            value={tagOptions.filter(option => selectedTags.includes(option.value))}
-                        />
-                    </div>
-
-                    <div className="space-y-2 mt-4">
+                    {/* Category Dropdown */}
+                    <div>
                         <FormLabel className="text-sm font-medium">Category</FormLabel>
                         <Select
-                            options={categories.map(category => ({
-                                value: category._id,
-                                label: category.name
+                            options={categories.map(cat => ({
+                                value: cat._id,
+                                label: cat.name
                             }))}
                             value={{
-                                value: form.watch('category'),
-                                label: categories.find(c => c._id === form.watch('category'))?.name || ''
+                                value: form.watch("category"),
+                                label: categories.find(cat => cat._id === form.watch("category"))?.name || ""
                             }}
-                            onChange={(selectedOption) => form.setValue("category", selectedOption?.value || '')}
+                            onChange={(opt) => form.setValue("category", opt?.value || "")}
                         />
                     </div>
 
+                    {/* Image Uploader */}
                     {imagePreview.length > 0 ? (
-                        <div>
-                            <ImagePreviewer
-                                setImageFiles={setImageFiles}
-                                imagePreview={imagePreview}
-                                setImagePreview={setImagePreview}
-                                className="mt-8"
-                            />
-                        </div>
+                        <ImagePreviewer
+                            setImageFiles={setImageFiles}
+                            imagePreview={imagePreview}
+                            setImagePreview={setImagePreview}
+                        />
                     ) : (
-                        <div className="mt-8">
-                            <NMImageUploader
-                                setImageFiles={setImageFiles}
-                                setImagePreview={setImagePreview}
-                                label="Upload Meal Image"
-                            />
-                        </div>
+                        <NMImageUploader
+                            setImageFiles={setImageFiles}
+                            setImagePreview={setImagePreview}
+                            label="Upload Product Images"
+                        />
                     )}
 
-                    <Button type="submit" className="mt-5 w-full" disabled={isSubmitting}>
-                        {isSubmitting ? "Updating..." : "Update Meal"}
+                    <Button type="submit" className="w-full mt-5" disabled={isSubmitting}>
+                        {isSubmitting ? "Updating..." : "Update Product"}
                     </Button>
                 </form>
             </Form>
