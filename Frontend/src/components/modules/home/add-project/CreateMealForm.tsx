@@ -53,8 +53,8 @@ export default function CreateMealForm() {
                 ageRange: data["specs.ageRange"],
             },
             variants: {
-                colors: data["variants.colors"]?.split(",").map((c) => c.trim()) || [],
-                sizes: data["variants.sizes"]?.split(",").map((s) => s.trim()) || [],
+                colors: data["variants.colors"]?.split(",").map((c: any) => c.trim()) || [],
+                sizes: data["variants.sizes"]?.split(",").map((s : any) => s.trim()) || [],
             },
         };
 

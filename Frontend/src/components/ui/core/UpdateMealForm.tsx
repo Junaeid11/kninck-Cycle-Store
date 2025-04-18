@@ -117,7 +117,9 @@ export default function UpdateProductForm({ product }: { product: any }) {
                             <FormField
                                 key={field.name}
                                 control={form.control}
-                                name={field.name}
+                                name={field.name as 
+                                    "name" | "description" | "slug" | "brand" | "price" | 
+                                    "discountPrice" | "stock" | "rating"}
                                 render={({ field: inputField }) => (
                                     <FormItem>
                                         <FormLabel>{field.label}</FormLabel>
@@ -133,7 +135,7 @@ export default function UpdateProductForm({ product }: { product: any }) {
                             <FormField
                                 key={`specs.${key}`}
                                 control={form.control}
-                                name={`specs.${key}`}
+                                name={`specs.${key}` as `specs.frame` | `specs.brakes` | `specs.weight`}
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>{`Spec - ${key.charAt(0).toUpperCase() + key.slice(1)}`}</FormLabel>
@@ -151,7 +153,7 @@ export default function UpdateProductForm({ product }: { product: any }) {
                             <FormField
                                 key={`variants.${key}`}
                                 control={form.control}
-                                name={`variants.${key}`}
+                                name={`variants.${key}` as `variants.colors` | `variants.sizes`}
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>{`Variants - ${key}`}</FormLabel>

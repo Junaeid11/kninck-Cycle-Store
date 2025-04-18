@@ -2,7 +2,7 @@
 import NMContainer from "@/components/ui/core/NMContainer";
 import OfferCard from "@/components/ui/core/OfferCard";
 import { getAllMeal } from "@/services/meal";
-import { IMeal } from "@/types/meal";
+import { IProduct } from "@/types/product";
 
 const OfferMeals = async () => {
   const { data: meals } = await getAllMeal();
@@ -15,7 +15,7 @@ const OfferMeals = async () => {
 
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {meals?.slice(3, 6).map((product: IMeal, idx: number) => (
+          {meals?.slice(3, 6).map((product: IProduct, idx: number) => (
             <OfferCard key={idx} meal={product} />
           ))}
         </div>

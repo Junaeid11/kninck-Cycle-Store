@@ -19,8 +19,8 @@ import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import logo from "@/assets/—Pngtree—logo bike cycling mtb isolated_5209109.png";
 import Image from "next/image";
-import logo from './../../../../assets/Screenshot 2025-03-01 014710_prev_ui.png'; // Import the logo here
 
 export default function RegisterForm() {
   const form = useForm({
@@ -56,15 +56,25 @@ export default function RegisterForm() {
     <div
       className="flex min-h-screen bg-gray-100"
       style={{
-        backgroundImage:
-          "url(https://static.vecteezy.com/system/resources/previews/008/660/558/non_2x/organic-food-background-hand-drawn-concept-free-vector.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+          backgroundImage:
+            "url(https://images.unsplash.com/photo-1505705694340-019e1e335916?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmljeWNsZXxlbnwwfHwwfHx8MA%3D%3D)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
       }}
     >
-      <div className="w-full max-w-md m-auto bg-amber-400/70 bg-opacity-95 rounded-lg shadow-xl p-8">
-        <div className="flex justify-center mb-4">
-          <Image  src={logo} alt="Logo" width={200} height={150} />
+      <div className="w-full max-w-md m-auto bg-sky-400/70 bg-opacity-95 rounded-lg shadow-xl p-8">
+      
+      <div className="flex justify-center mb-4">
+        <Link href="/" className="flex items-center  group">
+          <div
+          >
+            <Image src={logo} height={150} width={70} alt="logo" />
+          </div>
+
+          <h1 className="text-2xl font-extrabold text-black ">
+            Krinck Store
+          </h1>
+        </Link>
         </div>
 
         <Form {...form}>

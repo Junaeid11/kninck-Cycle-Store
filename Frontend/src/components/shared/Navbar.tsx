@@ -173,7 +173,7 @@ export default function Navbar() {
 
           <div className="relative" ref={dropdownRef}>
             <button
-              className="flex items-center gap-2 ml-5 text-black hover:text-[#7B2CBF]"
+              className="flex items-center gap-2 ml-5 text-black hover:text-[#ff2c2c]"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
               More
@@ -230,9 +230,9 @@ export default function Navbar() {
 
         <div className="flex items-center space-x-4">
           {user?.role === "customer" && (
-            <Link href="/order-meal">
+            <Link href="/order-product">
               <Button variant="outline" className="rounded-full flex items-center gap-1">
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCart className="w-5 h-5 text-blue-500" />
                 <span className="text-[#E63946] font-bold">{products?.length ?? 0}</span>
               </Button>
             </Link>

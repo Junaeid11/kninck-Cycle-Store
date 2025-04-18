@@ -8,14 +8,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { getAllMeal } from "@/services/meal";
-import { IMeal } from "@/types/meal";
+import { IProduct } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import NMContainer from "@/components/ui/core/NMContainer";
 import Link from "next/link";
 
 const HeroProductSlider = () => {
-  const [meals, setMeals] = useState<IMeal[]>([]);
+  const [meals, setMeals] = useState<IProduct[]>([]);
   const router = useRouter();
 
   useEffect(() => {

@@ -21,8 +21,9 @@ import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+
+import logo from "@/assets/—Pngtree—logo bike cycling mtb isolated_5209109.png";
 import Image from "next/image";
-import logo from "./../../../../assets/Screenshot 2025-03-01 014710_prev_ui.png";
 
 export default function LoginPage() {
   const form = useForm({
@@ -90,9 +91,16 @@ export default function LoginPage() {
       <div className="w-full max-w-md m-auto bg-[#6cbbedda] bg-opacity-95 rounded-lg shadow-xl p-8">
 
         <div className="flex justify-center mb-4">
-          <Link href="/">
-            <Image src={logo} alt="Logo" width={170} height={60} />
-          </Link>
+        <Link href="/" className="flex items-center  group">
+          <div
+          >
+            <Image src={logo} height={150} width={70} alt="logo" />
+          </div>
+
+          <h1 className="text-2xl font-extrabold text-black ">
+            Krinck Store
+          </h1>
+        </Link>
         </div>
         <div className="flex justify-between mb-4">
           <Button

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import NMContainer from "@/components/ui/core/NMContainer";
 import ProductCard from "@/components/ui/core/ProductCard";
 import { getAllMeal } from "@/services/meal";
-import { IMeal } from "@/types/meal";
+import { IProduct } from "@/types/product";
 import Link from "next/link";
 
 const FeatureProducts = async () => {
@@ -26,7 +26,7 @@ const FeatureProducts = async () => {
 </div>
 
 <div className="grid mx-5 grid-cols-1 gap-6 lg:grid-cols-4 ">
-  {meals?.slice(0, 4).map((product: IMeal, idx: number) => (
+  {meals?.slice(0, 4).map((product: IProduct, idx: number) => (
     <ProductCard key={idx} meal={product} />
   ))}
 </div>

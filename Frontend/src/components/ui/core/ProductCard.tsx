@@ -11,18 +11,18 @@ import {
 import { useUser } from "@/context/UserContext";
 import { addProduct } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { IMeal } from "@/types/meal";
+import { IProduct } from "@/types/product";
 import { ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
-const ProductCard = ({ meal }: { meal: IMeal }) => {
+const ProductCard = ({ meal }: { meal: IProduct }) => {
   const { user } = useUser();
   const dispatch = useAppDispatch();
 
-  const handleAddProduct = (meal: IMeal) => {
+  const handleAddProduct = (meal: IProduct) => {
     toast.success("Meal added to Cart!");
     dispatch(addProduct(meal));
   };

@@ -1,10 +1,10 @@
 'use client';
 
-import { IMeal } from '@/types/meal';
+import { IProduct } from '@/types/product';
 import Image from 'next/image';
 import React from 'react';
 
-const OfferCard = ({ meal }: { meal: IMeal }) => {
+const OfferCard = ({ meal }: { meal: IProduct }) => {
   return (
     <div className="relative rounded-xl shadow-lg overflow-hidden p-4 transition-transform transform hover:scale-105 duration-300">
       <div className="relative">

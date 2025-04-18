@@ -1,9 +1,9 @@
 
 import {  createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { IMeal } from "@/types/meal";
+import { IProduct } from "@/types/product";
 
-export interface CartProduct extends IMeal {
+export interface CartProduct extends IProduct {
   orderQuantity: number;
   stock: number
 

@@ -18,19 +18,13 @@ const HomePage = async () => {
       <section id="top-selling">
         <TopSellingDishes />
       </section>
-
      <FeatureSection/>
-
-
-
       <section id="products">
         <FeatureProducts />
       </section>
       <section id="blogs">
         <Blogs />
       </section>
- 
-
       <section id="faq">
         <FAQSection />
       </section>

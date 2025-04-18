@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Leaf, Bike, Truck, Users } from "lucide-react";
+import {  Bike, Truck, Users } from "lucide-react";
 
 export default function About() {
   return (
@@ -17,7 +17,7 @@ export default function About() {
       <section className="container mx-auto px-6 md:px-12 py-16 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Who We Are</h2>
         <p className="mt-4 text-gray-600 text-lg md:w-3/4 mx-auto">
-          At Krinck Store, we are passionate about bringing premium bicycles and accessories to cycling enthusiasts of all levels. Whether you're a city commuter or a trail conqueror, we've got the perfect ride for you.
+          At Krinck Store, we are passionate about bringing premium bicycles and accessories to cycling enthusiasts of all levels. Whether you&rsquo;re a city commuter or a trail conqueror, we&rsquo;ve got the perfect ride for you.
         </p>
         <div className="mt-8 flex justify-center">
           <Image

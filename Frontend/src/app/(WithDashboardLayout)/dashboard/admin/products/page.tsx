@@ -4,7 +4,7 @@ import { Table, TableHead, TableRow, TableHeader, TableCell, TableBody } from "@
 import Loading from '@/components/ui/loading';
 import { useEffect, useState } from 'react';
 import { deleteMenu, getAllMeal } from '@/services/meal';
-import { IMeal } from '@/types/meal';
+import { IProduct } from '@/types/product';
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Edit, Trash } from "lucide-react";
@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
-  const [meals, setMeals] = useState<IMeal[]>([]);
+  const [meals, setMeals] = useState<IProduct[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Dashboard() {
     fetchMeals();
   }, []);
 
-  const handleDelete = async (meal: IMeal) => {
+  const handleDelete = async (meal: IProduct) => {
     try {
       const res = await deleteMenu(meal._id);
       if (res.success) {

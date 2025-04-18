@@ -9,6 +9,7 @@ import {
   Utensils,
   PlusCircle,
   CheckCircle,
+  PackageSearch,
 } from "lucide-react";
 
 import {
@@ -64,7 +65,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       ]
       : [
         { title: "Dashboard", url: "/dashboard/admin", icon: LayoutDashboard, isActive: true },
-        { title: " Products", url: "/dashboard/admin/products", icon: Utensils, isActive: true },
+        { title: " Products", url: "/dashboard/admin/products", icon:   PackageSearch , isActive: true },
         { title: "Post Product", url: "/dashboard/admin/post-product", icon: PlusCircle, isActive: true },
         {
           title: "Profile",

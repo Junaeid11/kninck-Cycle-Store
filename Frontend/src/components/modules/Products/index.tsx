@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getAllMeal } from "@/services/meal";
-import { IMeal } from "@/types/meal";
+import { IProduct } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Loading from "@/components/ui/loading";
@@ -14,8 +14,8 @@ import { getAllCategories } from "@/services/Category";
 import { FaSearch } from "react-icons/fa";
 
 const FindProducts = () => {
-  const [meals, setMeals] = useState<IMeal[]>([]);
-  const [filteredMeals, setFilteredMeals] = useState<IMeal[]>([]);
+  const [meals, setMeals] = useState<IProduct[]>([]);
+  const [filteredMeals, setFilteredMeals] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [ratingFilter, setRatingFilter] = useState<number | null>(null);
@@ -79,13 +79,7 @@ const FindProducts = () => {
       updatedMeals = updatedMeals.filter((meal) => selectedCategories.includes(meal.category?._id));
     }
 
-    if (selectedDietaryTags.length > 0) {
-      updatedMeals = updatedMeals.filter((meal) =>
-        meal.dietaryTags && Array.isArray(meal.dietaryTags)
-          ? selectedDietaryTags.every((tag) => meal.dietaryTags.includes(tag))
-          : false
-      );
-    }
+    
 
     updatedMeals = updatedMeals.filter((meal) => meal.price <= price);
 
@@ -143,7 +137,7 @@ const FindProducts = () => {
       </div>
 
       <div className="flex-1">
-        <h2 className="text-2xl font-bold text-center mb-4">Find Delicious Meals</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">Products</h2>
 
         <div className="relative w-full mb-4">
           <input
@@ -157,21 +151,38 @@ const FindProducts = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {paginatedMeals.map((meal) => (
-            <div key={meal._id} className="bg-white shadow-lg rounded-lg p-4">
-              <Image width={100} height={100} src={meal.imageUrls[0]} alt={meal.name} className="w-full h-48 object-cover rounded-md" />
-              <h3 className="text-lg font-bold mt-2">{meal.name}</h3>
-              <p className="text-yellow-500 text-sm">⭐ {meal.rating}</p>
-              <p className="text-red-500 font-bold text-sm">${meal.price}</p>
-              <Link href={`/find-meals/${meal._id}`}>
-                <Button>See Details</Button>
-              </Link>
+            <div
+            key={meal._id}
+            className="bg-white shadow-md rounded-xl p-4 transition-all duration-300 transform hover:scale-105 hover:shadow-xl group cursor-pointer"
+          >
+            <div className="overflow-hidden rounded-lg">
+              <Image
+                width={100}
+                height={100}
+                src={meal.imageUrls[0]}
+                alt={meal.name}
+                className="w-full h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
+            <h3 className="text-lg font-semibold mt-3 text-gray-800 group-hover:text-red-500 transition-colors duration-200">
+              {meal.name}
+            </h3>
+            <p className="text-yellow-500 text-sm mt-1">⭐ {meal.rating}</p>
+            <p className="text-red-500 font-bold text-base mt-1">${meal.price}</p>
+          
+            <Link href={`/find-products/${meal._id}`} className="block mt-3">
+              <Button className="w-full bg-sky-500 transition-all duration-200 group-hover:bg-blue-400 group-hover:text-white">
+                See Details
+              </Button>
+            </Link>
+          </div>
+          
           ))}
         </div>
         <div className="mt-6 flex justify-center gap-4">
-          <Button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</Button>
+          <Button className="bg-sky-400 text-black" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</Button>
           <span>Page {currentPage} of {totalPages}</span>
-          <Button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Next</Button>
+          <Button className="bg-sky-400 text-black" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Next</Button>
         </div>
       </div>
     </div>
