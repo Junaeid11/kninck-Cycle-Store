@@ -3,7 +3,7 @@
 **An Integrated Full-Stack E-Commerce Platform**  
 
 ## 🌐 Live Demo  
-🔗 [KRINCK STORE Live](https://bi-cycle-snowy.vercel.app/)
+🔗 [KRINCK STORE Live](https://krinck.vercel.app)
 
 ---
 
@@ -33,8 +33,8 @@ KRINCK STORE is a fully integrated **e-commerce platform** built with a modern *
 ## 📂 Project Structure  
 ```plaintext
 krinck-store/
-│── store-frontend/        # React + Vite + Tailwind (Client)
-│── store-backend/         # Express + MongoDB (Server)
+│── frontend/        # next.js (Client)
+│── backend/         # Express + MongoDB (Server)
 │── package.json     # Project dependencies
 │── README.md        # Project documentation
 │── .gitignore       # Git ignored files
