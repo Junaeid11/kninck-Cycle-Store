@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/AuthService";
 
-type Role = keyof typeof roleBasedPrivateRoutes;
+type Role = "admin" | "customer";
 
 const authRoutes = ["/login", "/register"];
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/customer/],
-  admin: [/^\/admin/],
+  customer: [/^\/customer/, /^\/dashboard\/customer/],
+  admin: [/^\/admin/, /^\/dashboard\/admin/],
 };
 
 export const middleware = async (request: NextRequest) => {
@@ -20,17 +20,21 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.next();
     } else {
       return NextResponse.redirect(
-        new URL(
-          `https://krinck.vercel.app/login?redirectPath=${pathname}`,
-          request.url
-        )
+        new URL(`/login?redirectPath=${pathname}`, request.nextUrl.origin)
       );
     }
   }
+  if (authRoutes.includes(pathname)) {
+    const redirectUrl =
+      userInfo.role === "admin"
+        ? "/dashboard/admin"
+        : "/dashboard/customer";
 
-  if (userInfo?.role && roleBasedPrivateRoutes[userInfo?.role as Role]) {
-    const routes = roleBasedPrivateRoutes[userInfo?.role as Role];
-    if (routes.some((route) => pathname.match(route))) {
+    return NextResponse.redirect(new URL(redirectUrl, request.url));
+  }
+  if (userInfo?.role && roleBasedPrivateRoutes[userInfo.role as Role]) {
+    const allowedRoutes = roleBasedPrivateRoutes[userInfo.role as Role];
+    if (allowedRoutes.some((route) => route.test(pathname))) {
       return NextResponse.next();
     }
   }
@@ -41,7 +45,9 @@ export const middleware = async (request: NextRequest) => {
 export const config = {
   matcher: [
     "/login",
-    "/customer/:path*",
+    "/register",
     "/admin/:path*",
+    "/customer/:path*",
+    "/dashboard/:path*",
   ],
 };

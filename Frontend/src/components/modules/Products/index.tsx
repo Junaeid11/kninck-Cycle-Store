@@ -8,10 +8,16 @@ import Link from "next/link";
 import Loading from "@/components/ui/loading";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getAllCategories } from "@/services/Category";
 import { FaSearch } from "react-icons/fa";
+import { ShoppingCart, Star } from "lucide-react";
+
+import { motion } from "framer-motion";
+import { useAppDispatch } from "@/redux/hooks";
+import { toast } from "sonner";
+import { addProduct } from "@/redux/features/cartSlice";
 
 const FindProducts = () => {
   const [meals, setMeals] = useState<IProduct[]>([]);
@@ -57,6 +63,12 @@ const FindProducts = () => {
     };
     fetchCategories();
   }, []);
+  const dispatch = useAppDispatch();
+
+  const handleAddProduct = (meal: IProduct) => {
+    toast.success("Product added to Cart!");
+    dispatch(addProduct(meal));
+  };
 
   useEffect(() => {
     let updatedMeals = [...meals];
@@ -107,10 +119,16 @@ const FindProducts = () => {
     <div className="w-full md:w-72">
       <Card className="p-4 rounded-2xl shadow-md">
         <CardContent>
+          {/* Price Filter */}
           <h2 className="text-lg font-semibold mb-4">Filter By Price</h2>
-          <Slider defaultValue={[price]} max={3000} onValueChange={(val) => setPrice(val[0])} />
+          <Slider
+            defaultValue={[price]}
+            max={3000}
+            onValueChange={(val) => setPrice(val[0])}
+          />
           <p className="mt-2">${price}</p>
   
+          {/* Category Filter */}
           <h2 className="text-lg font-semibold mt-6">Category</h2>
           {categories.map((category) => (
             <div key={category._id} className="flex items-center gap-2 mt-1">
@@ -128,6 +146,7 @@ const FindProducts = () => {
             </div>
           ))}
   
+          {/* Rating Filter */}
           <h2 className="text-lg font-semibold mt-6">Rating</h2>
           <ul className="space-y-2 mt-2">
             {ratings.map((rating) => (
@@ -170,27 +189,82 @@ const FindProducts = () => {
         {paginatedMeals.map((meal) => (
           <div
             key={meal._id}
-            className="bg-white shadow-md rounded-xl p-4 transition-all duration-300 transform hover:scale-105 hover:shadow-xl group cursor-pointer"
+            className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300"
           >
-            <div className="overflow-hidden rounded-lg">
-              <Image
-                width={100}
-                height={100}
-                src={meal.imageUrls[0]}
-                alt={meal.name}
-                className="w-full h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
-              />
-            </div>
-            <h3 className="text-lg font-semibold mt-3 text-gray-800 group-hover:text-red-500 transition-colors duration-200">
-              {meal.name}
-            </h3>
-            <p className="text-yellow-500 text-sm mt-1">⭐ {meal.rating}</p>
-            <p className="text-red-500 font-bold text-base mt-1">${meal.price}</p>
-            <Link href={`/find-products/${meal._id}`} className="block mt-3">
-              <Button className="w-full bg-sky-500 transition-all duration-200 group-hover:bg-blue-400 group-hover:text-white">
-                See Details
-              </Button>
-            </Link>
+            <Card className="border-none shadow-none p-0 bg-sky-100">
+              <CardHeader className="relative p-0">
+                {/* Discount Badge */}
+                {meal?.discountPrice && (
+                  <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full z-10 shadow">
+                    Save {(((meal.price - meal.discountPrice) / meal.price) * 100).toFixed(0)}%
+                  </div>
+                )}
+  
+                <motion.div
+                  className="relative w-full h-48 overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src={
+                      meal?.imageUrls[0] ||
+                      "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
+                    }
+                    alt={meal?.name}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover transition-transform duration-300"
+                  />
+  
+                  {/* Overlay with Add to Cart */}
+                  <motion.div
+                    whileHover={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    className="absolute inset-0 bg-black/40 flex items-center justify-center transition duration-300"
+                  >
+                    <Button
+                      onClick={() => handleAddProduct(meal)}
+                      className="bg-white text-gray-800 hover:bg-gray-100 p-3 rounded-full shadow-lg"
+                    >
+                      <ShoppingCart className="w-5 h-5 text-blue-500" />
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              </CardHeader>
+  
+              {/* Meal Info */}
+              <CardContent className="p-4">
+                <Link href={`/find-products/${meal._id}`} passHref>
+                  <CardTitle className="text-lg font-semibold text-gray-800 hover:text-violet-600 transition cursor-pointer">
+                    {meal?.name.length > 22
+                      ? `${meal.name.slice(0, 22)}...`
+                      : meal.name}
+                  </CardTitle>
+                </Link>
+  
+                <div className="flex items-center justify-between mt-3 text-sm">
+                  {/* Price */}
+                  <div className="font-semibold text-red-500 text-base">
+                    {meal.discountPrice ? (
+                      <>
+                        <span className="line-through text-gray-400 mr-1">
+                          ${meal.price.toFixed(2)}
+                        </span>
+                        ${meal.discountPrice.toFixed(2)}
+                      </>
+                    ) : (
+                      `$${meal.price.toFixed(2)}`
+                    )}
+                  </div>
+  
+                  {/* Rating */}
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 text-yellow-400" fill="orange" />
+                    <span className="text-gray-600 text-sm">4.5</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         ))}
       </div>
@@ -217,6 +291,7 @@ const FindProducts = () => {
       </div>
     </div>
   </div>
+  
   
   );
 };

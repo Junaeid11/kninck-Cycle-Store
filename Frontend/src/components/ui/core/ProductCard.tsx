@@ -23,7 +23,7 @@ const ProductCard = ({ meal }: { meal: IProduct }) => {
   const dispatch = useAppDispatch();
 
   const handleAddProduct = (meal: IProduct) => {
-    toast.success("Meal added to Cart!");
+    toast.success("Product added to Cart!");
     dispatch(addProduct(meal));
   };
 

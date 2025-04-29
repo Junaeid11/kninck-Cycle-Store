@@ -111,9 +111,9 @@ export default function LoginPage() {
           </Button>
           <Button
             onClick={() => autofillCredentials("admin@gmail.com", "tanim121")}
-            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
           >
-            Provider Credentials
+            Admin Credentials
           </Button>
         </div>
 

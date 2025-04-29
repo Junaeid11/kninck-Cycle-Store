@@ -12,7 +12,7 @@ const FeatureProducts = async () => {
     <NMContainer>
       <div className="  bg-white pt-5">
 
-        <div className="relative text-center lg:mb-20">
+        <div className="relative text-center mb-10 lg:mb-20">
           {/* Background Large Word */}
           <h2 className="text-[4rem] lg:text-[7rem]  font-extrabold text-gray-100 uppercase absolute  left-1/2 -translate-x-1/2 pointer-events-none z-0">
             PRODUCTS
@@ -31,7 +31,7 @@ const FeatureProducts = async () => {
           ))}
         </div>
         <div className="text-center mt-5 pb-5">
-          <Link href="/find-meals">
+          <Link href="/find-products">
             <Button
               variant="outline"
               className="px-6 py-3 text-lg font-semibold rounded-full border-1 border-black text-white bg-sky-500  hover:bg-sky-300 hover:text-black transition duration-300 shadow-md"

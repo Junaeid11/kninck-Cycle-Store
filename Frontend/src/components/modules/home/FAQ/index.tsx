@@ -46,7 +46,7 @@ const FAQSection = () => {
 
   return (
     <NMContainer>
-      <div className="py-20 bg-white text-center relative overflow-hidden">
+      <div className="py-5 bg-white text-center relative overflow-hidden">
         <h2 className="text-[7rem] font-extrabold text-gray-100 absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-0">
           FAQ
         </h2>

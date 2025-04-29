@@ -19,7 +19,7 @@ const HeroSection = () => {
       <p className="mt-4 text-base sm:text-lg text-gray-700 leading-relaxed">
         Unleash your journey with premium bicycles crafted for performance and style. Whether for daily rides or weekend adventures, explore a collection built for speed, comfort, and power.
       </p>
-      <Link href="/all-products">
+      <Link href="/find-products">
         <button className="mt-6 bg-[#538fde] hover:bg-[#4388e3] text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-md">
           Shop Cycles
         </button>

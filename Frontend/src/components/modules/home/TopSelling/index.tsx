@@ -29,7 +29,7 @@ const HeroProductSlider = () => {
   return (
     <NMContainer>
       <section className="w-full relative bg-white py-20 text-center font-poppins overflow-hidden">
-        
+
         {/* Background Watermark */}
         <h2 className="text-[4rem] lg:text-[7rem] font-extrabold text-gray-100 absolute  left-1/2 transform -translate-x-1/2 pointer-events-none z-0 select-none tracking-widest">
           OFFER
@@ -43,7 +43,7 @@ const HeroProductSlider = () => {
 
         {/* Grid Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-4 md:px-10 relative z-10">
-          
+
           {/* Text Section */}
           <div className="space-y-6 text-left">
             <h4 className="text-lg text-gray-500 font-medium uppercase tracking-wide">
@@ -64,33 +64,40 @@ const HeroProductSlider = () => {
               </Button>
             </Link>
           </div>
-          <div className="relative">
-            <Swiper
-              modules={[Autoplay, Navigation]}
-              autoplay={{ delay: 3500 }}
-              navigation
-              loop
-              className="w-full"
-            >
-              {meals.map((meal) => (
-                <SwiperSlide key={meal._id}>
-                  <div
-                    className="flex justify-center cursor-pointer"
-                    onClick={() => router.push(`/find-products/${meal._id}`)}
-                  >
-                    <Image
-                      src={meal.imageUrls[0]}
-                      alt={meal.name}
-                      width={500}
-                      height={400}
-                      className="object-contain max-h-[400px] rounded-xl  transition-transform duration-500"
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            <div className="relative">
+              <Swiper
+                className="w-full h-full relative"
+                modules={[Autoplay, Navigation]}
+                autoplay={{ delay: 2500 }}
+                navigation={{
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                }}
+                loop
+              >
+                {meals.map((meal) => (
+                  <SwiperSlide key={meal._id}>
+                    <div
+                      className="flex justify-center cursor-pointer"
+                      onClick={() => router.push(`/find-products/${meal._id}`)}
+                    >
+                      <Image
+                        src={meal.imageUrls[0]}
+                        alt={meal.name}
+                        width={500}
+                        height={400}
+                        className="object-contain max-h-[400px] rounded-xl transition-transform duration-500"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              <div className="swiper-button-prev z-20 absolute top-1/2 left-2 -translate-y-1/2 text-black" />
+              <div className="swiper-button-next z-20 absolute top-1/2 right-2 -translate-y-1/2 text-black" />
+            </div>
+
           </div>
-        </div>
       </section>
     </NMContainer>
   );
